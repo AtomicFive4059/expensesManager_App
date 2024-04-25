@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--    item: for transaction placed inside the BottomNavigationView-->
     <item
         android:id="@+id/transaction"
         android:title="Trans."
         android:icon="@drawable/baseline_currency_rupee_24"/>
 
+    <!--    item: for statistics placed inside the BottomNavigationView-->
     <item
         android:id="@+id/stats"
         android:title="Stats"
         android:icon="@drawable/baseline_query_stats_24"/>
 
+    <!--    item: for account placed inside the BottomNavigationView-->
     <item
         android:id="@+id/account"
         android:title="Account"
         android:icon="@drawable/baseline_account_balance_24"/>
 
+    <!--    item: for More placed inside the BottomNavigationView-->
     <item
         android:id="@+id/more"
         android:title="More"

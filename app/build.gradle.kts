@@ -6,6 +6,7 @@ android {
     namespace = "com.example.expensesmanagerapp"
     compileSdk = 34
 
+    //initiate viewBinding for initiation of .xml tags
     buildFeatures{
         viewBinding = true
     }

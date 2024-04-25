@@ -3,12 +3,16 @@
     <style name="Base.Theme.ExpensesManagerApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+<!--        setting primary color application, later on will be comment this and stay with default -->
         <item name="colorPrimary">@color/orange</item>
     </style>
 
     <style name="Theme.ExpensesManagerApp" parent="Base.Theme.ExpensesManagerApp" />
 
+          <!--   CustomIndicator: for the indicator of the TabLayout -->
     <style name="App.CustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">#7ABFCA</item>
     </style>
+
 </resources>
