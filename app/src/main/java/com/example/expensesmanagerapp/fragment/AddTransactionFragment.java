@@ -35,6 +35,16 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAddTransactionBinding.inflate(inflater);
+
+        binding.incomeBtn.setOnClickListener(v -> {
+          binding.incomeBtn.setBackground(getContext().getDrawable(R.drawable.income_selector));
+        //  binding.ExpenseBtn.setBackground(getContext().getDrawable(R.drawable.default_selector));
+       //    binding.ExpenseBtn.setTextColor(getContext().getColor(R.color.textColor));
+          binding.incomeBtn.setTextColor(getContext().getColor(R.color.greenColor));
+        });
+
         return binding.getRoot();
+
+
     }
 }

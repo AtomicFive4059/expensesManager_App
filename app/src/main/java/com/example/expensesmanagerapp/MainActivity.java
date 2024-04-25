@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.expensesmanagerapp.databinding.ActivityMainBinding;
+import com.example.expensesmanagerapp.fragment.AddTransactionFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Transaction");
 
         binding.floatingActionButton.setOnClickListener(c -> {
-
+            new AddTransactionFragment().show(getSupportFragmentManager(),null);
         });
     }
 
