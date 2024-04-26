@@ -7,4 +7,11 @@
     <color name="textColor">#353535</color>
     <color name="greenColor">#4CAF50</color>
     <color name="redColor">#F44336</color>
+
+    <color name="category1">#00C853</color>
+    <color name="category2">#2962FF</color>
+    <color name="category3">#FFD600</color>
+    <color name="category4">#6200EA</color>
+    <color name="category5">#00B8D4</color>
+    <color name="category6">#AA00FF</color>
 </resources>
