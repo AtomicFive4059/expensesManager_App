@@ -53,7 +53,6 @@
             android:textSize="16sp" />
 
         <!--ImageView: to next date button-->
-
         <ImageView
             android:id="@+id/nextDate"
             android:layout_width="wrap_content"

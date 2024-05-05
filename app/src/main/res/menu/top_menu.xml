@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    search icom for adding to toolbar on dashboard-->
+<!--    search com for adding to toolbar on dashboard-->
     <item
         android:icon="@drawable/baseline_search_24"
         android:title="Search"

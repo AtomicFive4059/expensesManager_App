@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+<!--    ImageView: for image of category-->
     <ImageView
         android:id="@+id/category__Icon"
         android:layout_width="42dp"
@@ -17,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_auto_graph_24" />
 
+<!--    TextView: for name of the category-->
     <TextView
         android:id="@+id/category_TextView"
         android:layout_width="wrap_content"

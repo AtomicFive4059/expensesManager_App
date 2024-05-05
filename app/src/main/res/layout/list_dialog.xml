@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+<!--    RecyclerView: for presenting the list of view in Linear or Grid format-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_RecyclerView"
         android:layout_width="match_parent"

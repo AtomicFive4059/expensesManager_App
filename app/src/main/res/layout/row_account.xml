@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#9FA8DA">
 
+<!--TextView: for displaying the Account Name -->
     <TextView
         android:id="@+id/accontName"
         android:layout_width="0dp"
@@ -19,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    not required because, we used DividerItemDecoration and addItemDecoration for division of textview in Account name-->
 <!--    <View-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="1dp"-->
