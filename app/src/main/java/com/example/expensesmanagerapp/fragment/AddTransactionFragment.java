@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 
 import com.example.expensesmanagerapp.R;
+import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.FragmentAddTransactionBinding;
 import com.example.expensesmanagerapp.databinding.ListDialogBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -88,10 +89,10 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
                     calendar.set(Calendar.YEAR,datePicker.getYear());
 
                     //setting structure of the Date format 4'M for April and 2'M for digit of the month
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
+                   // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
 
                     //stored dateToShow in the String as per the defined format
-                    String dateToShow = dateFormat.format(calendar.getTime());
+                    String dateToShow = Helper.dateformat(calendar.getTime());
 
                     //finally setting all the date related things to the UI of .xml
                     binding.selectDate.setText(dateToShow);

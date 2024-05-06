@@ -1,6 +1,7 @@
 package com.example.expensesmanagerapp;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.ActivityMainBinding;
 import com.example.expensesmanagerapp.fragment.AddTransactionFragment;
 
@@ -67,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Handling the clicked event on linearLayout for jumped to the current date of world
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
-        todayDate = simpleDateFormat.format(calendar.getTime());;
+       // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
+        todayDate = Helper.dateformat(calendar.getTime());
 
         //setting setOnClickListener to managed the clicked event
         binding.linearLayout.setOnClickListener(c ->{
@@ -88,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
     //this method show the current date to the user on main screen of application call immediately
     public void updateDate(){
         //setting SimpleDateFormat for formatting the date structure
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
+     //   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
         //binding thar date structure to the UI of .xml
-        binding.currentDate.setText(simpleDateFormat.format(calendar.getTime()));
+        binding.currentDate.setText(Helper.dateformat(calendar.getTime()));
     }
 
     //method for display the top_menu with action icon on ToolBar left side by setting actionMode "always" on
