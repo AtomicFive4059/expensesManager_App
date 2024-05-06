@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensesmanagerapp.R;
+import com.example.expensesmanagerapp.Utiles.Constant;
 import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.RowTransactionBinding;
 
@@ -37,17 +38,27 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
         //getting the position from arraylist
         Transaction_Model transactionModel = arrayList.get(position);
 
-        holder.binding.transactionAmount.setText(transactionModel.getAccount());
+        holder.binding.transactionAmount.setText(String.valueOf(transactionModel.getAmount()));
         holder.binding.accountLabel.setText(transactionModel.getAccount());
 
        // Helper helper = new Helper(); instead of creating a every time obj of same class, we gonna do that particular method and function as a static and call directly
 
+        Category_Model categoryModel = Constant.getCategoryDetails(transactionModel.getCategory());
+        holder.binding.categoryIcon.setImageResource(categoryModel != null ? categoryModel.getCategoryImage() : 0);
+        //gand lag yaha pe hii
+        assert categoryModel != null;
+        holder.binding.categoryIcon.setBackgroundTintList(context.getColorStateList(categoryModel.getCategoryColor()));
+
+        //holder.binding.categoryIcon.setImageResource(categoryModel22.getCategoryImage());
+
+      //  holder.binding.categoryIcon.setBackgroundTintList(context.getColorStateList(categoryModel22 != null ? categoryModel22.getCategoryColor() : 0));
+
         holder.binding.transactionDate.setText(Helper.dateformat(transactionModel.getDate()));
         holder.binding.transactionCategory.setText(transactionModel.getCategory());
 
-        if (transactionModel.getType().equals("Income")){
+        if (transactionModel.getType().equals(Constant.INCOME)){
             holder.binding.transactionAmount.setTextColor(context.getColor(R.color.greenColor));
-        } else if (transactionModel.getType().equals("Expenses")) {
+        } else if (transactionModel.getType().equals(Constant.EXPENSES)) {
             holder.binding.transactionAmount.setTextColor(context.getColor(R.color.redColor));
         }
 

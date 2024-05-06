@@ -12,12 +12,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.expensesmanagerapp.Utiles.Constant;
 import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.ActivityMainBinding;
 import com.example.expensesmanagerapp.fragment.AddTransactionFragment;
+import com.example.expensesmanagerapp.fragment.Transaction_Adapter;
+import com.example.expensesmanagerapp.fragment.Transaction_Model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -53,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         //set Title to the Toolbar
         getSupportActionBar().setTitle("Transaction");
 
+        //calling setCategoris function
+        Constant.setCategories();
+
+
+
         //calling updateDate function
         updateDate();
 
@@ -83,7 +93,21 @@ public class MainActivity extends AppCompatActivity {
             //this method is ex. of lambda expression in android studio and passing null tag
             new AddTransactionFragment().show(getSupportFragmentManager(),null);
         });
+
+        ArrayList<Transaction_Model> transactionModelArrayList = new ArrayList<>();
+        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,1));
+        transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Investment","Bank","Some Notes Here",new Date(),1000,2));
+        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,3));
+        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Other","Cash","Some Notes Here",new Date(),500,4));
+        transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Rent","Cash","Some Notes Here",new Date(),500,5));
+
+        Transaction_Adapter adapter = new Transaction_Adapter(this,transactionModelArrayList);
+        binding.transactionList.setLayoutManager(new LinearLayoutManager(this));
+        binding.transactionList.setAdapter(adapter);
+
     }
+
+    ///////////////////////////////////////////////
 
     //outside function that is created outside of the onCreate method
 

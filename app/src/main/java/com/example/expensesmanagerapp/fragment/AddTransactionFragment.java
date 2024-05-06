@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 
 import com.example.expensesmanagerapp.R;
+import com.example.expensesmanagerapp.Utiles.Constant;
 import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.FragmentAddTransactionBinding;
 import com.example.expensesmanagerapp.databinding.ListDialogBinding;
@@ -112,19 +113,9 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
             //setting view to categoryDialog
             categoryDialog.setView(dialogBinding.getRoot());
 
-            //ArrayList of Category_Model with its instance
-            ArrayList<Category_Model> categoryModelArrayList = new ArrayList<>();
-
-            //adding data to constructor of Category_Model
-            categoryModelArrayList.add(new Category_Model("Salary",R.drawable.salary,R.color.category1));
-            categoryModelArrayList.add(new Category_Model("Business",R.drawable.firm,R.color.category2));
-            categoryModelArrayList.add(new Category_Model("Investment",R.drawable.investment,R.color.category3));
-            categoryModelArrayList.add(new Category_Model("Loan",R. drawable.loan,R.color.category4));
-            categoryModelArrayList.add(new Category_Model("Rent",R.drawable.rent,R.color.category5));
-            categoryModelArrayList.add(new Category_Model("Other",R.drawable.other_menu,R.color.category6));
 
             //Making obj of the Category_Adapter class and passing context of activity, arraylist of Category_Model and CategoryClickListener for displaying the selected category in the Ui field
-            Category_Adapter adapter = new Category_Adapter(getContext(), categoryModelArrayList, new Category_Adapter.CategoryClickListener() {
+            Category_Adapter adapter = new Category_Adapter(getContext(), Constant.categoryModelArrayList, new Category_Adapter.CategoryClickListener() {
                 @Override
                 public void onCategoryClicked(Category_Model categoryModel) {
                     //now displaying selected category in UI element

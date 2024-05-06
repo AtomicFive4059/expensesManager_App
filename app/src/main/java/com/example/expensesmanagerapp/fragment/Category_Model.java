@@ -45,4 +45,5 @@ public class Category_Model {
     public void setCategoryColor(int categoryColor) {
         this.categoryColor = categoryColor;
     }
+
 }

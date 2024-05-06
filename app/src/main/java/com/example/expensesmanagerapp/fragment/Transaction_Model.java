@@ -7,6 +7,7 @@ public class Transaction_Model {
 
     //all the string type of transaction
     private String type,category,account,note;
+
 //    date of transaction
     private Date date;
     //amount of transaction
