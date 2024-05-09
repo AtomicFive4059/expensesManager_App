@@ -1,11 +1,12 @@
 package com.example.expensesmanagerapp.Utiles;
-
+//making constant class for methods and function that constantly used and called over the code
 import com.example.expensesmanagerapp.R;
 import com.example.expensesmanagerapp.fragment.Category_Model;
 
 import java.util.ArrayList;
 
 public class Constant {
+    //String of Income and Expenses that used frequently
     public static String INCOME  = "INCOME";
     public static String EXPENSES  = "EXPENSES";
 
@@ -25,14 +26,17 @@ public class Constant {
         categoryModelArrayList.add(new Category_Model("Other",R.drawable.other_menu,R.color.category6));
     }
 
+    //Adding image and background to Transaction list for home fragment
+    //Creating obj of the Category_Model and setting Image and background color to Transaction list on the CategoryName basis
     public static Category_Model getCategoryDetails(String categoryName){
+        //for each loop
         for (Category_Model cat:categoryModelArrayList) {
 
+            //returning cat if getCategoryName is == categoryName
             if (cat.getCategoryName().equals(categoryName)){
                 return cat;
             }
         }
-
         return null;
     }
 }
