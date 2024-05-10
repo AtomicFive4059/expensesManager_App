@@ -148,6 +148,7 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
             //adding data to constructor of Account_Model
             accountModelArrayList.add(new Account_Model(200,"Cash"));
             accountModelArrayList.add(new Account_Model(300,"Bank"));
+            accountModelArrayList.add(new Account_Model(450,"Card"));
             accountModelArrayList.add(new Account_Model(580,"PayTm"));
             accountModelArrayList.add(new Account_Model(600,"EasyPaisa"));
             accountModelArrayList.add(new Account_Model(400,"Other"));

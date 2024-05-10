@@ -39,4 +39,23 @@ public class Constant {
         }
         return null;
     }
+
+    //function for getting and setting colors from color value resources and try to set it to Account label background
+    public static int getAccountsColors(String accountName){
+        //we used, switch conditional statement for setting the colors
+        switch (accountName){
+            case "Bank":
+                return R.color.bankColor;
+            case "Cash":
+              return   R.color.cashColor;
+            case "Card":
+               return R.color.cardColor;
+            case "PayTm":
+            return R.color.PayTm;
+            case "EasyPaisa":
+            return R.color.EassyPaisa;
+            default:
+               return R.color.defaultColor;
+        }
+    }
 }

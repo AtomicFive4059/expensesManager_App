@@ -62,6 +62,12 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
         //getting and setting transactionCategory to Transaction list
         holder.binding.transactionCategory.setText(transactionModel.getCategory());
 
+        //setting background color to accountLabel with help of getAccountsColors method and color resource folder
+        //holder.binding.accountLabel.setBackgroundTintList(context.getColorStateList(Constant.getAccountsColors(transactionModel.getAccount())));
+
+        //instead of setting background, i'm going to set text color for feel of UI
+        holder.binding.accountLabel.setTextColor(context.getColor(Constant.getAccountsColors(transactionModel.getAccount())));
+
         //setting Textcolor of Transaction amount on basis of Income and Expenses
         if (transactionModel.getType().equals(Constant.INCOME)){
             //if Income,set Green
@@ -80,7 +86,7 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
     }
 
     //ViewHolder class for holding the view
-    public class TransactionViewHolder extends RecyclerView.ViewHolder{
+    public static class  TransactionViewHolder extends RecyclerView.ViewHolder{
 
         //here initiating view binding of the row_transaction layout
         RowTransactionBinding binding;

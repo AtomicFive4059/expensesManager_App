@@ -15,5 +15,13 @@
     <color name="category3">#FFD600</color>
     <color name="category4">#6200EA</color>
     <color name="category5">#00B8D4</color>
-    <color name="category6">#AA00FF</color>
+    <color name="category6">#7D4594</color>
+
+    <color name="bankColor">#AA00FF</color>
+    <color name="cashColor">#00B8D4</color>
+    <color name="cardColor">#00C853</color>
+    <color name="PayTm">#DD2C00</color>
+    <color name="EassyPaisa">#FFD600</color>
+    <color name="Other">#AEEA00</color>
+    <color name="defaultColor">#6200EA</color>
 </resources>

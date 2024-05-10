@@ -94,15 +94,19 @@ public class MainActivity extends AppCompatActivity {
             new AddTransactionFragment().show(getSupportFragmentManager(),null);
         });
 
+        //making arraylist of transaction_model and adding data through this
         ArrayList<Transaction_Model> transactionModelArrayList = new ArrayList<>();
         transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,1));
         transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Investment","Bank","Some Notes Here",new Date(),1000,2));
-        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,3));
+        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Card","Some Notes Here",new Date(),500,3));
         transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Other","Cash","Some Notes Here",new Date(),500,4));
-        transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Rent","Cash","Some Notes Here",new Date(),500,5));
+        transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Rent","Other","Some Notes Here",new Date(),500,5));
 
+        //instance of Transaction_Adapter with the parameter of application context and arraylist of transaction_model
         Transaction_Adapter adapter = new Transaction_Adapter(this,transactionModelArrayList);
+        //setting layout of Transaction list
         binding.transactionList.setLayoutManager(new LinearLayoutManager(this));
+        //finally setting adapter to transactionList
         binding.transactionList.setAdapter(adapter);
 
     }

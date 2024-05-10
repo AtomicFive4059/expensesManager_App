@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensesmanagerapp.R;
+import com.example.expensesmanagerapp.Utiles.Constant;
 import com.example.expensesmanagerapp.databinding.RowAccountBinding;
 
 import java.util.ArrayList;
@@ -53,6 +54,11 @@ public class Account_Adapter extends RecyclerView.Adapter<Account_Adapter.Accoun
         Account_Model accountModel = arrayList.get(position);
         //getting Account Name from position of Account_Model and setting it to UI tags of layout
         holder.binding.accontName.setText(accountModel.getAccountName());
+
+       // holder.binding.accontName.setBackgroundTintList(context.getColorStateList(Constant.getAccountsColors(accountModel.getAccountName())));
+
+        //instead of setting background, i'm going to set text color of the account name
+        holder.binding.accontName.setTextColor(context.getColor(Constant.getAccountsColors(accountModel.getAccountName())));
 
         //handling the onClick of the itemView
         holder.itemView.setOnClickListener(c ->{
