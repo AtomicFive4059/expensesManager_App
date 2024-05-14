@@ -2,8 +2,13 @@ package com.example.expensesmanagerapp.fragment;
 
 import java.util.Date;
 
-//Transaction_Model act as a Model Class for transaction
-public class Transaction_Model {
+import io.realm.RealmObject;
+import io.realm.RealmObjectSchema;
+import io.realm.annotations.PrimaryKey;
+
+//Transaction_Model act as a Model Class for transaction of the Users
+//Extending Transaction_Model class form RealmObject for the connection of database
+public class Transaction_Model extends RealmObject {
 
     //all the string type of transaction
     private String type,category,account,note;
@@ -13,7 +18,8 @@ public class Transaction_Model {
     //amount of transaction
     private double amount;
 
-    //Unique id of each transaction
+    //Unique id of each transaction with annotation @ sing
+    @PrimaryKey
     private long id;
 
     //empty constructor

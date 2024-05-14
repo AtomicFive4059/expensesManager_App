@@ -1,10 +1,6 @@
 package com.example.expensesmanagerapp;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.CalendarContract;
-import android.provider.ContactsContract;
-import android.view.LayoutInflater;
 import android.view.Menu;
 
 import androidx.activity.EdgeToEdge;
@@ -21,10 +17,12 @@ import com.example.expensesmanagerapp.fragment.AddTransactionFragment;
 import com.example.expensesmanagerapp.fragment.Transaction_Adapter;
 import com.example.expensesmanagerapp.fragment.Transaction_Model;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     //String for storing the current date inside it
     String todayDate;
 
+    //creating instance of Realm database
+    Realm realm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,23 +48,30 @@ public class MainActivity extends AppCompatActivity {
         //getting and setting the root of the .xml
         setContentView(binding.getRoot());
 
+        //setting context to Realm database
+        Realm.init(this);
+
+        //calling setupDatabase(); method here
+        setupDatabase();
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+
+
         //setting orange color to the toolBar of the application
         setSupportActionBar(binding.toolBar);
         //set Title to the Toolbar
-        getSupportActionBar().setTitle("Transaction");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Transaction");
 
         //calling setCategoris function
         Constant.setCategories();
 
-
-
-        //calling updateDate function
+        //calling updateDate function, that regards with the date of calender
         updateDate();
 
         //Handling the nextDateBtn to forward the date
@@ -94,24 +102,65 @@ public class MainActivity extends AppCompatActivity {
             new AddTransactionFragment().show(getSupportFragmentManager(),null);
         });
 
-        //making arraylist of transaction_model and adding data through this
-        ArrayList<Transaction_Model> transactionModelArrayList = new ArrayList<>();
-        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,1));
-        transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Investment","Bank","Some Notes Here",new Date(),1000,2));
-        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Card","Some Notes Here",new Date(),500,3));
-        transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Other","Cash","Some Notes Here",new Date(),500,4));
-        transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Rent","Other","Some Notes Here",new Date(),500,5));
 
-        //instance of Transaction_Adapter with the parameter of application context and arraylist of transaction_model
-        Transaction_Adapter adapter = new Transaction_Adapter(this,transactionModelArrayList);
-        //setting layout of Transaction list
+        //making arraylist of transaction_model and adding data through this
+       // ArrayList<Transaction_Model> transactionModelArrayList = new ArrayList<>();
+
+        //Adding data dynamically
+       //  transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,1));
+       // transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Investment","Bank","Some Notes Here",new Date(),1000,2));
+      //  transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Business","Card","Some Notes Here",new Date(),500,3));
+       // transactionModelArrayList.add(new Transaction_Model(Constant.INCOME,"Other","Cash","Some Notes Here",new Date(),500,4));
+      //  transactionModelArrayList.add(new Transaction_Model(Constant.EXPENSES,"Rent","Other","Some Notes Here",new Date(),500,5));
+
+
+
+        //adding data to Realm database
+       // realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Cash","Some Notes Here",new Date(),500,new Date().getTime()));
+      //  realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Investment","Bank","Some Notes Here",new Date(),1000,2));
+      //  realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Card","Some Notes Here",new Date(),500,3));
+      //  realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Other","Cash","Some Notes Here",new Date(),500,4));
+      //  realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Rent","Other","Some Notes Here",new Date(),500,5));
+
+        //RealmResults act as Arraylist and  realm.where(Transaction_Model.class).findAll(); this the Query of Realm Database for finding the data
+        RealmResults<Transaction_Model> newTransaction = realm.where(Transaction_Model.class).findAll();
+
+        //here beginTransaction
+        realm.beginTransaction();
+
+        //adding data to Realm database
+        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Business","Cash","Note Come Here",new Date(),500,new Date().getTime()));
+        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Investment","Bank","Note",new Date(),1000,new Date().getTime()));
+        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Card","Note",new Date(),450,new Date().getTime()));
+        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Other","Cash","Note",new Date(),700,new Date().getTime()));
+
+        //finally commitTransaction, all operation must be performed between the beginTransaction() and commitTransaction()
+        realm.commitTransaction();
+
+       // instance of Transaction_Adapter with the parameter of application context and arraylist of transaction_model
+        Transaction_Adapter adapter = new Transaction_Adapter(MainActivity.this,newTransaction);
+
+        //setting layout of Transaction list with realtime updation
         binding.transactionList.setLayoutManager(new LinearLayoutManager(this));
+
         //finally setting adapter to transactionList
         binding.transactionList.setAdapter(adapter);
+    }
+
+
+
+    ///////////////////////////////////////////////
+
+    //method for setting Realm database
+   public void setupDatabase(){
+        //setting getDefaultInstance to Realm database
+        //might be created, nullpointerexception or runtimeexecption for that assert Realm.getDefaultConfiguration() != null;
+//       assert Realm.getDefaultConfiguration() != null;
+       realm = Realm.getDefaultInstance();
 
     }
 
-    ///////////////////////////////////////////////
+
 
     //outside function that is created outside of the onCreate method
 

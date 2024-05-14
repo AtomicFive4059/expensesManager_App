@@ -1,6 +1,13 @@
+import com.android.tools.r8.internal.id
+
 plugins {
     alias(libs.plugins.androidApplication)
 }
+
+//Realm Database related
+//apply plugin: "realm-android" with android studio latest version syntax
+apply { plugin("realm-android") }
+
 
 android {
     namespace = "com.example.expensesmanagerapp"
@@ -45,4 +52,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+        // realm database dependencies, another way of integrating Realm Database
+      // implementation ("io.realm:realm-android-library:10.5.1")
+      // annotationProcessor ("io.realm:realm-android-library:10.5.1")
+
 }

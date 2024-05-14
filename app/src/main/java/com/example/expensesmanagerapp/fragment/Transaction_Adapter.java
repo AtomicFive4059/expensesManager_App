@@ -13,17 +13,21 @@ import com.example.expensesmanagerapp.Utiles.Constant;
 import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.RowTransactionBinding;
 
-import java.util.ArrayList;
+import io.realm.RealmResults;
 
 public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapter.TransactionViewHolder> {
 
     Context context;
-    ArrayList<Transaction_Model> arrayList;
+   // ArrayList<Transaction_Model> arrayList;
 
-    public Transaction_Adapter(Context context, ArrayList<Transaction_Model> arrayList) {
+    //Query of Realm database, for inserting data just like ArrayList
+    RealmResults<Transaction_Model> transactionModelRealmResults;
+
+    public Transaction_Adapter(Context context, RealmResults<Transaction_Model> transactionModelRealmResults) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.transactionModelRealmResults = transactionModelRealmResults;
     }
+
 
     //onCreateViewHolder inflate the layout with the help of ViewHolder class
     @NonNull
@@ -36,7 +40,7 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
     @Override
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
         //getting the position from arraylist
-        Transaction_Model transactionModel = arrayList.get(position);
+        Transaction_Model transactionModel = transactionModelRealmResults.get(position);
 
         //getting and setting transactionAmount to Transaction list
         holder.binding.transactionAmount.setText(String.valueOf(transactionModel.getAmount()));
@@ -79,10 +83,10 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
 
     }
 
-    //returing the size of array
+    //returning the size of array
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return transactionModelRealmResults.size();
     }
 
     //ViewHolder class for holding the view

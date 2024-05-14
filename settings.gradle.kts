@@ -17,6 +17,13 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+
+//        // Realm Database repositories
+//    repositories {
+//           maven (url ="https://jitpack.io")
+//    }
+
+
 }
 
 rootProject.name = "Expenses Manager App"
