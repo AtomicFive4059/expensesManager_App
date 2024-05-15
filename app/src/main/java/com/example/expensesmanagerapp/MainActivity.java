@@ -8,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.expensesmanagerapp.Utiles.Constant;
 import com.example.expensesmanagerapp.Utiles.Helper;
 import com.example.expensesmanagerapp.databinding.ActivityMainBinding;
 import com.example.expensesmanagerapp.fragment.AddTransactionFragment;
+import com.example.expensesmanagerapp.fragment.MainViewModel;
 import com.example.expensesmanagerapp.fragment.Transaction_Adapter;
 import com.example.expensesmanagerapp.fragment.Transaction_Model;
 
@@ -35,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
     //String for storing the current date inside it
     String todayDate;
 
+    //creating instance of ViewModel class, that globally accepted
+    MainViewModel viewModel;
+
     //creating instance of Realm database
-    Realm realm;
+   // Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
         //getting and setting the root of the .xml
         setContentView(binding.getRoot());
 
-        //setting context to Realm database
-        Realm.init(this);
+        //Initiating ViewModel here by passing Context and ViewModel class
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
 
         //calling setupDatabase(); method here
-        setupDatabase();
+      //  setupDatabase();
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -123,42 +130,67 @@ public class MainActivity extends AppCompatActivity {
       //  realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Rent","Other","Some Notes Here",new Date(),500,5));
 
         //RealmResults act as Arraylist and  realm.where(Transaction_Model.class).findAll(); this the Query of Realm Database for finding the data
-        RealmResults<Transaction_Model> newTransaction = realm.where(Transaction_Model.class).findAll();
+      //  RealmResults<Transaction_Model> newTransaction = realm.where(Transaction_Model.class).findAll();
 
-        //here beginTransaction
-        realm.beginTransaction();
+//        //here beginTransaction
+//        realm.beginTransaction();
+//
+//        //adding data to Realm database
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Business","Cash","Note Come Here",new Date(),500,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Investment","Bank","Note",new Date(),1000,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Card","Note",new Date(),450,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Other","Cash","Note",new Date(),700,new Date().getTime()));
+//
+//        //finally commitTransaction, all operation must be performed between the beginTransaction() and commitTransaction()
+//        realm.commitTransaction();
 
-        //adding data to Realm database
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Business","Cash","Note Come Here",new Date(),500,new Date().getTime()));
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Investment","Bank","Note",new Date(),1000,new Date().getTime()));
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Card","Note",new Date(),450,new Date().getTime()));
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Other","Cash","Note",new Date(),700,new Date().getTime()));
 
-        //finally commitTransaction, all operation must be performed between the beginTransaction() and commitTransaction()
-        realm.commitTransaction();
-
-       // instance of Transaction_Adapter with the parameter of application context and arraylist of transaction_model
-        Transaction_Adapter adapter = new Transaction_Adapter(MainActivity.this,newTransaction);
 
         //setting layout of Transaction list with realtime updation
         binding.transactionList.setLayoutManager(new LinearLayoutManager(this));
 
+        //Observing inserted data of Realm database and making according change via onChanged methode
+        viewModel.realmResultsMutableLiveData.observe(this, new Observer<RealmResults<Transaction_Model>>() {
+
+            // public void onChanged(RealmResults<Transaction_Model> transactionModelRealmResults) method that, make changes as per data inserted to Realm database
+            @Override
+            public void onChanged(RealmResults<Transaction_Model> transactionModelRealmResults) {
+
+                // instance of Transaction_Adapter with the parameter of application context and arraylist of transaction_model
+                Transaction_Adapter adapter = new Transaction_Adapter(MainActivity.this,transactionModelRealmResults);
+
+                //finally setting adapter to transactionList
+                binding.transactionList.setAdapter(adapter);
+            }
+        });
+
+        //calling method of MainViewModel that is getTransaction(); with the help of class instanced
+        viewModel.getTransaction(calendar);
+
+
+       // instance of Transaction_Adapter with the parameter of application context and arraylist of transaction_model
+        //Transaction_Adapter adapter = new Transaction_Adapter(MainActivity.this,newTransaction);
+
+        //setting layout of Transaction list with realtime updation
+        //binding.transactionList.setLayoutManager(new LinearLayoutManager(this));
+
         //finally setting adapter to transactionList
-        binding.transactionList.setAdapter(adapter);
+       // binding.transactionList.setAdapter(adapter);
     }
 
 
 
     ///////////////////////////////////////////////
 
-    //method for setting Realm database
-   public void setupDatabase(){
-        //setting getDefaultInstance to Realm database
-        //might be created, nullpointerexception or runtimeexecption for that assert Realm.getDefaultConfiguration() != null;
-//       assert Realm.getDefaultConfiguration() != null;
-       realm = Realm.getDefaultInstance();
-
-    }
+//    //method for setting Realm database
+//   public void setupDatabase(){
+//        //setting getDefaultInstance to Realm database
+//        //might be created, nullpointerexception or runtimeexecption for that assert Realm.getDefaultConfiguration() != null;
+////       assert Realm.getDefaultConfiguration() != null;
+//       //setting context to Realm database
+//       Realm.init(this);
+//       realm = Realm.getDefaultInstance();
+//    }
 
 
 
@@ -170,6 +202,9 @@ public class MainActivity extends AppCompatActivity {
      //   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
         //binding thar date structure to the UI of .xml
         binding.currentDate.setText(Helper.dateformat(calendar.getTime()));
+
+        //calling getTransaction from MainViewModel class for to update Transaction list base on Date of Transaction noted or entry or recorded
+        viewModel.getTransaction(calendar);
     }
 
     //method for display the top_menu with action icon on ToolBar left side by setting actionMode "always" on

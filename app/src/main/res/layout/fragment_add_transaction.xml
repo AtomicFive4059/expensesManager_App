@@ -79,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Select Amount"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--            TextInputLayout: for category-->
@@ -123,7 +124,8 @@
                     android:id="@+id/make_Notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Make Notes" />
+                    android:hint="Make Notes"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 <!--            MaterialButton: for save transaction-->
