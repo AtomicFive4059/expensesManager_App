@@ -22,7 +22,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
 <!--                TextView: of the income button-->
                 <TextView
@@ -80,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Select Amount"
                     android:inputType="number"
-                    android:focusable="false"/>
+                    android:focusable="auto"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--            TextInputLayout: for category-->
@@ -124,8 +125,7 @@
                     android:id="@+id/make_Notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Make Notes"
-                    android:focusable="false"/>
+                    android:hint="Make Notes"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 <!--            MaterialButton: for save transaction-->

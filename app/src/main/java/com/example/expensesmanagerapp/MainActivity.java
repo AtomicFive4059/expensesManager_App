@@ -164,6 +164,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Observing type Income Transaction data of Realm database and making according change via onChanged methode
+        viewModel.totalIncome.observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                binding.incomeLbl.setText(String.valueOf(aDouble));
+            }
+        });
+
+        //Observing type Expenses Transaction data of Realm database and making according change via onChanged methode
+        viewModel.totalExpense.observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                binding.expenseLbl.setText(String.valueOf(aDouble));
+            }
+        });
+
+        //Observing type Total Amount, Transaction data of Realm database and making according change via onChanged methode
+        viewModel.totalAmount.observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                binding.totalLbl.setText(String.valueOf(aDouble));
+            }
+        });
+
         //calling method of MainViewModel that is getTransaction(); with the help of class instanced
         viewModel.getTransaction(calendar);
 
