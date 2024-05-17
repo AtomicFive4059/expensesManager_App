@@ -2,6 +2,7 @@ package com.example.expensesmanagerapp;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     String todayDate;
 
     //creating instance of ViewModel class, that globally accepted
-    MainViewModel viewModel;
+   public MainViewModel viewModel;
 
     //creating instance of Realm database
    // Realm realm;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Handling the nextDateBtn to forward the date
         binding.nextDate.setOnClickListener(c ->{
+            binding.nextDate.performLongClick();
             calendar.add(Calendar.DATE,+1);
             updateDate();
         });
@@ -95,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Handling the clicked event on linearLayout for jumped to the current date of world
        // SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
-        todayDate = Helper.dateformat(calendar.getTime());
+       // todayDate = Helper.dateformat(calendar.getTime());
 
-        //setting setOnClickListener to managed the clicked event
-        binding.linearLayout.setOnClickListener(c ->{
-            binding.currentDate.setText(todayDate);
-        });
+       //setting setOnClickListener to managed the clicked event
+//        binding.linearLayout.setOnClickListener(c ->{
+//            binding.currentDate.setText(todayDate);
+//        });
 
 
         //to handle the floatingActionButton clicked, then show the BottomSheetFragment to the user for addition of exp or income transaction
@@ -161,6 +163,18 @@ public class MainActivity extends AppCompatActivity {
 
                 //finally setting adapter to transactionList
                 binding.transactionList.setAdapter(adapter);
+
+                //setting Visibility of emptyState imageView for, there is no further transaction/no transaction for Tomorrow
+                if (transactionModelRealmResults.size() > 0){
+                    //setting Visibility of emptyState imageView if........
+                    binding.emptyState.setVisibility(View.GONE);
+
+                }else {
+                    //setting Visibility of emptyState imageView else........
+                    binding.emptyState.setVisibility(View.VISIBLE);
+                }
+
+
             }
         });
 
@@ -215,6 +229,11 @@ public class MainActivity extends AppCompatActivity {
 //       Realm.init(this);
 //       realm = Realm.getDefaultInstance();
 //    }
+
+    public void getLiveTransactionUpdation(){
+        //form the ViewModel class, we calling getTransaction method for immediate updation of Recorded Transaction
+        viewModel.getTransaction(calendar);
+    }
 
 
 

@@ -44,9 +44,9 @@ public class Constant {
     public static int getAccountsColors(String accountName){
         //we used, switch conditional statement for setting the colors
         switch (accountName){
-            case "Bank":
-                return R.color.bankColor;
             case "Cash":
+                return R.color.bankColor;
+            case "Bank":
               return   R.color.cashColor;
             case "Card":
                return R.color.cardColor;

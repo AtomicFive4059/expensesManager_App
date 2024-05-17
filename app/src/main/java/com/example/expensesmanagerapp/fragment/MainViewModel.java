@@ -112,16 +112,19 @@ public class MainViewModel extends AndroidViewModel {
 
 
     //addTransaction() method for inserting data to Realm database
-    public void addTransaction(){
+    public void addTransaction(Transaction_Model transactionModel){
 
         //here beginTransaction
         realm.beginTransaction();
 
+        //adding Transaction details in Realm database
+        realm.copyToRealmOrUpdate(transactionModel);
+
         //adding data to Realm database
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Business","Cash","Note Come Here",new Date(),500,new Date().getTime()));
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Investment","Bank","Note",new Date(),1000,new Date().getTime()));
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Card","Note",new Date(),450,new Date().getTime()));
-        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Other","Cash","Note",new Date(),700,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.EXPENSES,"Business","Cash","Note Come Here",new Date(),500,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Investment","Bank","Note",new Date(),1000,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Business","Card","Note",new Date(),450,new Date().getTime()));
+//        realm.copyToRealmOrUpdate(new Transaction_Model(Constant.INCOME,"Other","Cash","Note",new Date(),700,new Date().getTime()));
 
         //finally commitTransaction, all operation must be performed between the beginTransaction() and commitTransaction()
         realm.commitTransaction();

@@ -45,7 +45,7 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
         //getting and setting transactionAmount to Transaction list
         holder.binding.transactionAmount.setText(String.valueOf(transactionModel.getAmount()));
         //getting and setting accountLabel to Transaction list
-        holder.binding.accountLabel.setText(transactionModel.getAccount());
+        holder.binding.transactionAccount.setText(transactionModel.getAccount());
 
        // Helper helper = new Helper(); instead of creating a every time obj of same class, we gonna do that particular method and function as a static and call directly
 
@@ -67,10 +67,10 @@ public class Transaction_Adapter extends RecyclerView.Adapter<Transaction_Adapte
         holder.binding.transactionCategory.setText(transactionModel.getCategory());
 
         //setting background color to accountLabel with help of getAccountsColors method and color resource folder
-        //holder.binding.accountLabel.setBackgroundTintList(context.getColorStateList(Constant.getAccountsColors(transactionModel.getAccount())));
+//       holder.binding.accountLabel.setBackgroundTintList(context.getColorStateList(Constant.getAccountsColors(transactionModel.getAccount())));
 
         //instead of setting background, i'm going to set text color for feel of UI
-        holder.binding.accountLabel.setTextColor(context.getColor(Constant.getAccountsColors(transactionModel.getAccount())));
+//      holder.binding.accountLabel.setTextColor(context.getColor(Constant.getAccountsColors(transactionModel.getAccount())));
 
         //setting Textcolor of Transaction amount on basis of Income and Expenses
         if (transactionModel.getType().equals(Constant.INCOME)){

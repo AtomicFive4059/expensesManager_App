@@ -51,17 +51,18 @@
 
 <!--            TextView: for amount type-->
             <TextView
-                android:id="@+id/account_Label"
-                android:layout_width="wrap_content"
+                android:id="@+id/transaction_Account"
+                android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAlignment="center"
                 android:background="@drawable/account_bg"
                 android:paddingLeft="5dp"
                 android:paddingTop="2dp"
                 android:paddingRight="5dp"
                 android:paddingBottom="2dp"
                 android:text="Cash"
-                android:textColor="@color/white" />
+                android:textStyle="italic"/>
 
 <!--           TextView: for date of transaction -->
             <TextView
